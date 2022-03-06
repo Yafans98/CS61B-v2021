@@ -112,11 +112,9 @@ public class Model extends Observable {
     boolean changed;
     changed = false;
     Board b = this.board;
-    // 转棋盘
     b.setViewingPerspective(side);
 
     for (int col = 0; col < b.size(); col += 1) {
-      // 先全部放到最上方
       for (int row = size() - 1; row >= 0; row--) {
         Tile cNode = board.tile(col, row);
         {
@@ -135,7 +133,6 @@ public class Model extends Observable {
           }
         }
       }
-      // 接着尝试合并
       for (int row = size() - 1; row >= 0; row -= 1) {
         if (row - 1 < 0) {
           break;
@@ -167,7 +164,6 @@ public class Model extends Observable {
     // TODO: Modify this.board (and perhaps this.score) to account
     // for the tilt to the Side SIDE. If the board changed, set the
     // changed local variable to true.
-    // 转回去
     b.setViewingPerspective(Side.NORTH);
     checkGameOver();
     if (changed) {
