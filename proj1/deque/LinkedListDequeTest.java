@@ -61,6 +61,12 @@ public class LinkedListDequeTest {
   public void removeEmptyTest() {
     LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
     lld1.addFirst(3);
+    lld1.addLast(4);
+    lld1.addLast(4);
+    lld1.addLast(4);
+    lld1.addLast(4);
+    lld1.addLast(4);
+    lld1.addLast(4);
 
     lld1.removeLast();
     lld1.removeFirst();

@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.In;
 import java.util.Iterator;
 
 public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
-  private final IntNode sentinal = new IntNode(null, null, null);
+  private IntNode sentinal = new IntNode(null, null, null);
   private int size;
 
   private class IntNode {
@@ -59,8 +59,8 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
       return null;
     }
     T val = sentinal.next.item;
-    sentinal.next = sentinal.next.next;
     sentinal.next.next.prev = sentinal;
+    sentinal.next = sentinal.next.next;
     size -= 1;
     return val;
   }
@@ -70,8 +70,8 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
       return null;
     }
     T val = sentinal.prev.item;
-    sentinal.prev = sentinal.prev.prev;
     sentinal.prev.prev.next = sentinal;
+    sentinal.prev = sentinal.prev.prev;
     size -= 1;
     return val;
   }
@@ -129,17 +129,24 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
   }
   // equals
   public boolean equals(Object o) {
-    if (o instanceof LinkedListDeque) {
-      if (((LinkedListDeque) o).size() != this.size()) {
-        return false;
-      }
-      for (int i = 0; i < this.size(); i += 1) {
-        if (this.get(i) != ((LinkedListDeque) o).get(i)) {
-          return false;
-        }
-      }
+    if (o == null) {
+      return false;
+    }
+    if (o == this) {
       return true;
     }
-    return false;
+    if (!(o instanceof Deque<?>)) {
+      return false;
+    }
+    Deque<?> ad = (Deque<?>) o;
+    if (ad.size() != size) {
+      return false;
+    }
+    for (int i = 0; i < size; i++) {
+      if (ad.get(i) != get(i)) {
+        return false;
+      }
+    }
+    return true;
   }
 }
