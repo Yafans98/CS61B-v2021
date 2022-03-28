@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Iterable<T> {
+public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
   private T[] items;
   private int size;
   private int nextFirst;
@@ -16,27 +16,47 @@ public class ArrayDeque<T> implements Iterable<T> {
     size = 0;
     Asize = 8;
   }
-  // indexAdjust
-  private int indexAdjust(int x) {
-    x = x < 0 ? x + Asize : x;
-    x = x < Asize ? x : x % Asize;
-    return x;
+  // return an ArrayDeque with an ele
+  public ArrayDeque(T item) {
+    items[3] = item;
+    nextFirst = 2;
   }
+  // sizeAdjust
+  private void sizeAdjust() {
+    if (isEmpty()) {
+      resize(8);
+    }
+    if (nextFirst < 0 || nextLast == Asize) {
+      resize(Asize * 2);
+    }
+    if (size < Asize * 0.25 && Asize > 8) {
+      resize(Asize / 2);
+    }
+  }
+  // resize
+  private void resize(int x) {
+    T[] a = (T[]) new Object[x];
+    int firstPos = Math.abs(x - Asize) / 2;
+    System.arraycopy(items, nextFirst + 1, a, firstPos, size);
+    Asize = x;
+    items = a;
+    nextFirst = firstPos - 1;
+    nextLast = firstPos + size;
+  }
+
   // addFirst
   public void addFirst(T x) {
     items[nextFirst] = x;
     size += 1;
-    nextFirst = indexAdjust(nextFirst - 1);
+    nextFirst -= 1;
+    sizeAdjust();
   }
   // addLast
   public void addLast(T x) {
     items[nextLast] = x;
     size += 1;
-    nextLast = indexAdjust(nextLast + 1);
-  }
-  // isEmpty
-  public boolean isEmpty() {
-    return size == 0;
+    nextLast += 1;
+    sizeAdjust();
   }
   // size
   public int size() {
@@ -55,10 +75,11 @@ public class ArrayDeque<T> implements Iterable<T> {
     if (size == 0) {
       return null;
     }
-    T returnItem = get(0);
-    nextFirst = indexAdjust(nextFirst + 1);
+    nextFirst += 1;
+    T returnItem = items[nextFirst];
     items[nextFirst] = null;
     size -= 1;
+    sizeAdjust();
     return returnItem;
   }
   // removeLast
@@ -66,10 +87,11 @@ public class ArrayDeque<T> implements Iterable<T> {
     if (size == 0) {
       return null;
     }
-    T returnItem = get(size - 1);
-    nextLast = indexAdjust(nextLast - 1);
+    nextLast -= 1;
+    T returnItem = items[nextLast];
     items[nextLast] = null;
     size -= 1;
+    sizeAdjust();
     return returnItem;
   }
   // get
@@ -77,7 +99,7 @@ public class ArrayDeque<T> implements Iterable<T> {
     if (this.size == 0 || this.size < index + 1) {
       return null;
     }
-    return items[indexAdjust(nextFirst + 1 + index)];
+    return items[nextFirst + 1 + index];
   }
   // Iterator
   public Iterator<T> iterator() {

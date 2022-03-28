@@ -4,6 +4,34 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ArrayDequeTest {
+
+  // resize Test
+  @Test
+  public void resizeTest() {
+    ArrayDeque<Integer> ad1 = new ArrayDeque<>();
+    ad1.addFirst(3);
+    ad1.addFirst(2);
+    ad1.addFirst(1);
+    ad1.addLast(4);
+    ad1.addLast(5);
+    ad1.addLast(6);
+    ad1.addLast(7);
+    ad1.addLast(7);
+    ad1.addLast(7);
+    ad1.addLast(7);
+    ad1.addLast(7);
+    ad1.addLast(7);
+    ad1.removeLast();
+    ad1.removeLast();
+    ad1.removeLast();
+    ad1.removeLast();
+    ad1.removeLast();
+    ad1.removeLast();
+    ad1.removeLast();
+    ad1.removeLast();
+    // see through Java Visualizer!
+  }
+
   // addTest
   @Test
   public void addTest() {
@@ -16,7 +44,6 @@ public class ArrayDequeTest {
     assertEquals(2, ad1.size());
     assertEquals(true, ad2.isEmpty());
   }
-
   // printTest
   @Test
   public void printTest() {
