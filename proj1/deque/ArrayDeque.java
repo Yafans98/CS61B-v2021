@@ -52,6 +52,9 @@ public class ArrayDeque<T> implements Iterable<T> {
   }
   // removeFirst
   public T removeFirst() {
+    if (size == 0) {
+      return null;
+    }
     T returnItem = get(0);
     nextFirst = indexAdjust(nextFirst + 1);
     items[nextFirst] = null;
@@ -60,6 +63,9 @@ public class ArrayDeque<T> implements Iterable<T> {
   }
   // removeLast
   public T removeLast() {
+    if (size == 0) {
+      return null;
+    }
     T returnItem = get(size - 1);
     nextLast = indexAdjust(nextLast - 1);
     items[nextLast] = null;

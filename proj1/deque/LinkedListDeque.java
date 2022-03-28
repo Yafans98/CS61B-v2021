@@ -75,12 +75,12 @@ public class LinkedListDeque<T> implements Iterable<T> {
   }
   // removeLast
   public T removeLast() {
-    T val = sentinal.prev.item;
-    sentinal.prev = sentinal.prev.prev;
-    sentinal.prev.prev.next = sentinal;
     if (size == 0) {
       return null;
     }
+    T val = sentinal.prev.item;
+    sentinal.prev = sentinal.prev.prev;
+    sentinal.prev.prev.next = sentinal;
     size -= 1;
     return val;
   }
