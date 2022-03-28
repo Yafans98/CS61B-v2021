@@ -16,11 +16,6 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
     size = 0;
     Asize = 8;
   }
-  // return an ArrayDeque with an ele
-  public ArrayDeque(T item) {
-    items[3] = item;
-    nextFirst = 2;
-  }
   // sizeAdjust
   private void sizeAdjust() {
     if (isEmpty()) {
@@ -34,6 +29,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
     }
   }
   // resize
+  @SuppressWarnings("unchecked")
   private void resize(int x) {
     T[] a = (T[]) new Object[x];
     int firstPos = Math.abs(x - Asize) / 2;

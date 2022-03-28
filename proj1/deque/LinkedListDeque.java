@@ -1,10 +1,12 @@
 package deque;
 
 import java.util.Iterator;
-import java.util.Timer;
 
 public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
-  public class IntNode {
+  private IntNode sentinal;
+  private int size;
+
+  private class IntNode {
     public IntNode prev;
     public T item;
     public IntNode next;
@@ -16,8 +18,6 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
     }
   }
 
-  private IntNode sentinal;
-  private int size;
   // return an empty LinkedListDeque
   public LinkedListDeque() {
     sentinal = new IntNode(null, null, null);
@@ -26,12 +26,6 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
     size = 0;
   }
 
-  public LinkedListDeque(T item) {
-    sentinal = new IntNode(null, null, null);
-    sentinal.next = new IntNode(sentinal, item, null);
-    sentinal.prev = sentinal;
-    size = 1;
-  }
   // addFirst
   public void addFirst(T x) {
     IntNode p = new IntNode(sentinal, x, sentinal.next);
