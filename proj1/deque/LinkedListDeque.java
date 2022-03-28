@@ -3,6 +3,7 @@ package deque;
 import edu.princeton.cs.algs4.In;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
   private IntNode sentinal = new IntNode(null, null, null);
@@ -142,6 +143,12 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
       return false;
     }
     for (int i = 0; i < size; i++) {
+      if (ad.get(i) instanceof Deque) {
+        boolean eq = ad.get(i).equals(get(i));
+        if (!eq) {
+          return false;
+        }
+      }
       if (ad.get(i) != get(i)) {
         return false;
       }

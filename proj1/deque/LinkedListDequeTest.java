@@ -71,7 +71,6 @@ public class LinkedListDequeTest {
     lld1.getRecursive(0);
     lld1.addLast(4);
     lld1.getRecursive(1);
-
     int size = lld1.size();
   }
 
@@ -138,13 +137,17 @@ public class LinkedListDequeTest {
   @Test
   // Test equals
   public void equalsTest() {
-    LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
-    lld1.addLast(5);
-    lld1.addFirst(3);
-    LinkedListDeque<Integer> lld2 = new LinkedListDeque<>();
-    lld2.addLast(5);
-    lld2.addFirst(3);
-    assertTrue("Not equal1", lld1.equals(lld2));
-    assertFalse("Not equal2", lld1.equals(null));
+    LinkedListDeque<LinkedListDeque> lld1 = new LinkedListDeque<>();
+    LinkedListDeque<LinkedListDeque> lld2 = new LinkedListDeque<>();
+    LinkedListDeque<Integer> ele1 = new LinkedListDeque<>();
+    LinkedListDeque<Integer> ele2 = new LinkedListDeque<>();
+    ele1.addLast(1);
+    ele2.addLast(2);
+    lld1.addLast(ele1);
+    lld1.addLast(ele2);
+    lld2.addLast(ele1);
+    lld2.addLast(ele2);
+
+    assertEquals(true, lld1.equals(lld2));
   }
 }
