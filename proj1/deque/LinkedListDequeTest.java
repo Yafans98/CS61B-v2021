@@ -14,8 +14,13 @@ public class LinkedListDequeTest {
   @Test
   public void getTest() {
     LinkedListDeque<Boolean> lld1 = new LinkedListDeque<>();
+    LinkedListDeque<Integer> lld2 = new LinkedListDeque<>();
     lld1.addFirst(true);
     lld1.addLast(false);
+    for (int i = 1; i <= 12; i += 1) {
+      lld2.addLast(i);
+    }
+    assertEquals(11, (int) lld2.get(10));
     assertEquals(false, lld1.get(1));
   }
 

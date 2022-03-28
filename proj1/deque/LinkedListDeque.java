@@ -93,7 +93,6 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
     if (index == 0) {
       return currentNode.item;
     }
-    currentNode = currentNode.next;
     return getSupport(currentNode, index - 1);
   }
 
