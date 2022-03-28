@@ -1,17 +1,19 @@
 package deque;
 
+import edu.princeton.cs.algs4.In;
+
 import java.util.Iterator;
 
 public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
-  private IntNode sentinal;
+  private final IntNode sentinal = new IntNode(null, null, null);
   private int size;
 
   private class IntNode {
-    public IntNode prev;
-    public T item;
-    public IntNode next;
+    private IntNode prev;
+    private T item;
+    private IntNode next;
 
-    public IntNode(IntNode p, T f, IntNode n) {
+    private IntNode(IntNode p, T f, IntNode n) {
       prev = p;
       item = f;
       next = n;
@@ -20,7 +22,6 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
 
   // return an empty LinkedListDeque
   public LinkedListDeque() {
-    sentinal = new IntNode(null, null, null);
     sentinal.next = sentinal;
     sentinal.prev = sentinal;
     size = 0;
