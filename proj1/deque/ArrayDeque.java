@@ -27,7 +27,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
     if (nextFirst < 0 || nextLast == Asize) {
       resize(Asize * 2);
     }
-    if (size < Asize * 0.25 && Asize > 8) {
+    if (size < Asize * 0.25 && Asize > 16) {
       resize(Asize / 2);
     }
   }
