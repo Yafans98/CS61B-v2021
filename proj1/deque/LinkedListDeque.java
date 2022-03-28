@@ -129,29 +129,25 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
   }
   // equals
   public boolean equals(Object o) {
-    if (o == null) {
+    if (!(o instanceof Deque)) {
       return false;
     }
-    if (o == this) {
-      return true;
-    }
-    if (!(o instanceof Deque<?>)) {
+    Deque deckQ = (Deque) o;
+    return equalsHelper(deckQ);
+  }
+
+  private boolean equalsHelper(Deque<?> Q) {
+    if (Q.size() != size()) {
       return false;
     }
-    Deque<?> ad = (Deque<?>) o;
-    if (ad.size() != size) {
-      return false;
-    }
-    for (int i = 0; i < size; i++) {
-      if (ad.get(i) instanceof Deque) {
-        boolean eq = ad.get(i).equals(get(i));
-        if (!eq) {
-          return false;
-        }
-      }
-      if (ad.get(i) != get(i)) {
+
+    IntNode curNode = sentinal.next;
+    for (int i = 0; i < size; i += 1) {
+      boolean equals = curNode.item.equals(Q.get(i));
+      if (!equals) {
         return false;
       }
+      curNode = curNode.next;
     }
     return true;
   }

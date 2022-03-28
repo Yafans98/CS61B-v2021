@@ -144,8 +144,20 @@ public class LinkedListDequeTest {
     ele1.addLast(1);
     ele2.addLast(2);
     lld1.addLast(ele1);
+    lld1.addLast(ele1);
+    lld1.addLast(ele1);
+    lld1.addLast(ele1);
+    lld1.addLast(ele2);
+    lld1.addLast(ele2);
+    lld1.addLast(ele2);
     lld1.addLast(ele2);
     lld2.addLast(ele1);
+    lld2.addLast(ele1);
+    lld2.addLast(ele1);
+    lld2.addLast(ele1);
+    lld2.addLast(ele2);
+    lld2.addLast(ele2);
+    lld2.addLast(ele2);
     lld2.addLast(ele2);
 
     assertEquals(true, lld1.equals(lld2));
