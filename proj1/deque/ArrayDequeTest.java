@@ -30,14 +30,23 @@ public class ArrayDequeTest {
   @Test
   public void removeTest() {
     ArrayDeque<Integer> ad1 = new ArrayDeque<>();
+    ArrayDeque<Integer> ad2 = new ArrayDeque<>();
     ad1.addFirst(3);
     ad1.addFirst(2);
+    ad1.addFirst(1);
+    ad1.addFirst(0);
     ad1.addLast(4);
+    ad2.addLast(4);
+    ad2.addLast(5);
+    ad2.addLast(6);
+    ad2.addLast(7);
     int itemFirst = ad1.removeFirst();
     int itemLast = ad1.removeLast();
+    int itemLast2 = ad2.removeLast();
     assertEquals(4, itemLast);
-    assertEquals(2, itemFirst);
-    assertEquals(1, ad1.size());
+    assertEquals(0, itemFirst);
+    assertEquals(3, ad1.size());
+    assertEquals(7, itemLast2);
   }
 
   // equalsTest
@@ -53,5 +62,17 @@ public class ArrayDequeTest {
     assertEquals(true, ad1.equals(ad2));
     ld1.addFirst(2);
     assertEquals(false, ad1.equals(ld1));
+  }
+
+  // outOfBoundTest
+  @Test
+  public void outOfBoundTest() {
+    ArrayDeque<Integer> ad1 = new ArrayDeque<>();
+    ad1.addLast(3);
+    ad1.addLast(3);
+    ad1.addLast(3);
+    ad1.addLast(3);
+    ad1.addLast(3);
+    assertEquals(3, (int) ad1.get(4));
   }
 }

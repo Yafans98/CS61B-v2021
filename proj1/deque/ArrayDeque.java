@@ -16,20 +16,23 @@ public class ArrayDeque<T> implements Iterable<T> {
     size = 0;
     Asize = 8;
   }
+  // indexAdjust
+  private int indexAdjust(int x) {
+    x = x < 0 ? x + Asize : x;
+    x = x < Asize ? x : x % Asize;
+    return x;
+  }
   // addFirst
   public void addFirst(T x) {
     items[nextFirst] = x;
     size += 1;
-    nextFirst -= 1;
-    if (nextFirst < 0) {
-      nextFirst += Asize;
-    }
+    nextFirst = indexAdjust(nextFirst - 1);
   }
   // addLast
   public void addLast(T x) {
     items[nextLast] = x;
     size += 1;
-    nextLast = (nextLast + 1) % Asize;
+    nextLast = indexAdjust(nextLast + 1);
   }
   // isEmpty
   public boolean isEmpty() {
@@ -50,22 +53,25 @@ public class ArrayDeque<T> implements Iterable<T> {
   // removeFirst
   public T removeFirst() {
     T returnItem = get(0);
-    items[nextFirst + 1] = null;
-    nextFirst += 1;
+    nextFirst = indexAdjust(nextFirst + 1);
+    items[nextFirst] = null;
     size -= 1;
     return returnItem;
   }
   // removeLast
   public T removeLast() {
     T returnItem = get(size - 1);
-    items[nextLast - 1] = null;
-    nextLast -= 1;
+    nextLast = indexAdjust(nextLast - 1);
+    items[nextLast] = null;
     size -= 1;
     return returnItem;
   }
   // get
   public T get(int index) {
-    return items[nextFirst + 1 + index];
+    if (this.size == 0 || this.size < index + 1) {
+      return null;
+    }
+    return items[indexAdjust(nextFirst + 1 + index)];
   }
   // Iterator
   public Iterator<T> iterator() {
