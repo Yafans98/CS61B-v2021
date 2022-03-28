@@ -3,7 +3,7 @@ package deque;
 import java.util.Comparator;
 
 public class MaxArrayDeque<T> extends ArrayDeque<T> {
-  private Comparator<T> comparator;
+  private final Comparator<T> comparator;
 
   public MaxArrayDeque(Comparator<T> c) {
     comparator = c;
@@ -37,7 +37,7 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
     if (!(o instanceof MaxArrayDeque)) {
       return false;
     }
-    if (((MaxArrayDeque) o).max() != max()) {
+    if (((MaxArrayDeque<?>) o).max() != max()) {
       return false;
     }
     return super.equals(o);
